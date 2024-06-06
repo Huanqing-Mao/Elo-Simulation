@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Simulator {
-    public static final int numLoop = 1000;
-    public static final int numQuestions = 300;
+    public static final int NUM_LOOP = 1000;
+    public static final int NUMQUESTIONS = 300;
 
     ArrayList<Person> AList = new ArrayList<Person>();
     ArrayList<Person> BList = new ArrayList<Person>();

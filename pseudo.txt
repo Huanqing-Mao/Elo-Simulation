@@ -24,13 +24,13 @@ class Person: // encapsulate each Person's information
     
     methods:
         - toString
-        - updateRating(double changeInRating)
+        - void updateRating(double changeInRating)
 
 class RatingAPI: // calculate and update ratings for the given people
     properties:
         - final k = 40
-        - final ratio = 400
+        - final constant = 400
     methods:
-        - calculateChange(Person1, Person2, result1, result2)
-        - updateRatingInspect(A, B, C, isAcorr, isBcorr, isCcorr) // if C is inspected
+        - double calculateChange(Person1, Person2, result1)
+        - void updateRatingInspect(A, B, C, isAcorr, isBcorr, isCcorr) // if C is inspected
         - void updateRatingNoInspect(A, B, isAcorr, isBcorr) // if C is not inspected
