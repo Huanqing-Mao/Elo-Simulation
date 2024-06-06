@@ -1,5 +1,5 @@
 A[] -> 30 A of accuracy between 0.5 to 0.7
--> 30 B of accuracy between 0.5 to 0.7
+B[] -> 30 B of accuracy between 0.5 to 0.7
 C[] -> 8 C of accuracy between 0.2 to 0.9
 
 
