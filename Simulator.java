@@ -110,7 +110,7 @@ public class Simulator {
 
         // export as a csv file
         String[] header = {"Accuracy", "5% Percentile", "20% Percentile", "30% Percentile", "50% Percentile", "70% Percentile", "90% Percentile", "95% Percentile"};
-        String csvFile = "C Performance Distribution.csv";
+        String csvFile = String.format("C Performance Distribution %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         try (PrintWriter writer = new PrintWriter(new FileWriter(csvFile))) {
             // write header
             for (int i = 0; i < header.length; i++) {
