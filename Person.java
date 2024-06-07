@@ -19,6 +19,10 @@ class Person {
         return this.rating;
     }
 
+    double getAccuracy() {
+        return this.accuracy;
+    }
+
 
     void updateRating(double changeInRating) {
         this.rating += changeInRating;

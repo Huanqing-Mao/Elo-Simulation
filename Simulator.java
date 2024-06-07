@@ -1,4 +1,7 @@
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 public class Simulator {
     public static final int NUM_LOOP = 1000;
@@ -19,14 +22,11 @@ public class Simulator {
         Simulator simulator = new Simulator();
         Random random = new Random();
         RatingAPI api = new RatingAPI(CORRECT_ANSWER);
-        Person c9 = null;
+       
 
         for (int j = 0; j <= 8; j++) {
             double accuracyC = 0.2 + 0.1 * j;
             Person c = new Person("C", j + 1, 1800.0, accuracyC);
-            if (j == 8) {
-                c9 = c;
-            }
             CList.add(c);
            simulator.CRatingDistri.put(c, new ArrayList<Double>());
         }
@@ -72,6 +72,8 @@ public class Simulator {
 
         }
 
+        ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+
         for (Person c : CList) {
             System.out.println(c.toString());
             ArrayList<Double> cPerformance = simulator.CRatingDistri.get(c);
@@ -85,6 +87,7 @@ public class Simulator {
             int perc70 = 7 * length / 10;
             int perc90 = 9 * length / 10;
             int perc95 = length - length / 20;
+            int[] indices = new int[]{perc5, perc20, perc30, perc50, perc70, perc90, perc95};
             System.out.println(String.format("Lowest = %.3f", cPerformance.get(0)));
             System.out.println(String.format("5%% Perc = %.3f", cPerformance.get(perc5)));
             System.out.println(String.format("20%% Perc = %.3f", cPerformance.get(perc20)));
@@ -94,8 +97,46 @@ public class Simulator {
             System.out.println(String.format("90%% Perc = %.3f", cPerformance.get(perc90)));
             System.out.println(String.format("95%% Perc = %.3f", cPerformance.get(perc95)));
             System.out.println(String.format("Highest = %.3f\n", cPerformance.get(length - 1)));
+                        
+            ArrayList<String> row = new ArrayList<String>();
+            row.add("" + c.getAccuracy());
+            for (int id : indices) {
+                row.add("" + cPerformance.get(id));
+            }
+            
+            data.add(row);
+
+        }
+
+        // export as a csv file
+        String[] header = {"Accuracy", "5% Percentile", "20% Percentile", "30% Percentile", "50% Percentile", "70% Percentile", "90% Percentile", "95% Percentile"};
+        String csvFile = "C Performance Distribution.csv";
+        try (PrintWriter writer = new PrintWriter(new FileWriter(csvFile))) {
+            // write header
+            for (int i = 0; i < header.length; i++) {
+                writer.print(header[i]);
+                if (i < header.length - 1) {
+                    writer.print(",");
+                }
+            }
+            writer.println();
 
 
+            // write data
+            for (ArrayList<String> row : data) {
+                for (int i = 0; i < row.size(); i++) {
+                    writer.print(row.get(i));
+                    if (i < row.size() - 1) writer.print(",");
+                }
+                writer.println();
+            }
+
+            System.out.println("File created successfully.");
+            
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
 
