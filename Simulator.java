@@ -94,7 +94,7 @@ public class Simulator {
             double accuracyC = 0.2 + 0.1 * j;
             Person c = new Person("C", j + 1, 1800.0, accuracyC);
             CList.add(c);
-           simulator.CRatingDistri.put(c, new ArrayList<Double>());
+            simulator.CRatingDistri.put(c, new ArrayList<Double>());
         }
 
 
