@@ -33,4 +33,4 @@ class RatingAPI: // calculate and update ratings for the given people
         - final constant = 400
     methods:
         - double calculateChange(Person1, Person2, result1)
-        - void updateRatingInspect(A, B, C,answer for each person)
+        - void updateRating(A, B, C,answer for each person)

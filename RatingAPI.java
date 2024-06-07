@@ -4,9 +4,11 @@ public class RatingAPI {
     public static final double WIN = 1.0;
     public static final double LOSE = 0.0;
     public static final double TIE = 0.5;
-    public static final int CORRECT_ANSWER = 1;
+    private final int correctAnswer;
 
-    RatingAPI() {}
+    RatingAPI(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 
     double calculateChange(Person person1, Person person2, double resultOfPerson1) { // Elo formula
         double power = (person2.getRating() - person1.getRating()) / CONSTANT;
@@ -16,52 +18,61 @@ public class RatingAPI {
     }
     
     // if C is inspected
-    void updateRatingInspect(Person A, Person B, Person C, int Aanswer, int Banswer, int Canswer) {
-        // 0.2 chance of C being inspected (ADD LATER), if C not inspected, only A and B are compared for both cases
+    void updateRating(Person A, Person B, Person C, int Aanswer, int Banswer, int Canswer) {
+        // 0.2 chance of C being inspected (ADD LATER), if C not inspected, only A and B are compared for both cased
+        // here assumes C is inspected:
 
-        double AChange;
-        double BChange;
-        double CChange;
+        double AChange = 0.0;
+        double BChange = 0.0;
+        double CChange = 0.0;
 
         
         if (Aanswer == Banswer) {   // if A == B
+
+            // initialise A and B as tie : A vs B
+            AChange = this.calculateChange(A, B, TIE);
+            BChange = this.calculateChange(B, A, TIE);
+
+            double CvA = 0.0;
+            double CvB = 0.0;
+
             
-            if (Aanswer == Canswer) {
-
-                // A vs B
-                AChange = this.calculateChange(A, B, TIE);
-                BChange = this.calculateChange(B, A, TIE);
-
-                // A vs C and B vs C, C take average
-                double CvA = this.calculateChange(C, A, TIE);
-                double CvB = this.calculateChange(C, B, TIE);
+            if (Aanswer == Canswer) {   // if A = B = C, A and B are tie, A vs C and B vs C, C take average
+                
+                CvA = this.calculateChange(C, A, TIE);
+                CvB = this.calculateChange(C, B, TIE);
                 CChange = (CvA + CvB) / 2.0;
 
 
-            } else {    // if A = B != C, A vs B, A vs C, B vs C, C take average
-                // if A and B are correct, then C is wrong
-                if (Aanswer == CORRECT_ANSWER && Canswer != CORRECT_ANSWER) {
-
-                    // A vs B
-
-
-
-                    // A vs C and B vs C, C take average
-
-                }
+            } else {    // if A = B != C
                 
+                if (Aanswer == correctAnswer && Canswer != correctAnswer) {   // if A and B are correct, then C is wrong
 
+                    // A and B are tie, A vs C and B vs C, C take average
+                    CvA = this.calculateChange(C, A, LOSE);
+                    CvB = this.calculateChange(C, B, LOSE);
+                    CChange = (CvA + CvB) / 2.0;
 
+                } else if (Aanswer != correctAnswer) {    // if A and B are wrong
+                       
+                    if (Canswer == correctAnswer) {    // if C is correct
+                        
+                        // A and B are tie, A vs C and B vs C, C take average
+                        CvA = this.calculateChange(C, A, WIN);
+                        CvB = this.calculateChange(C, B, WIN);
+                        CChange = (CvA + CvB) / 2.0;
 
+                    } else {    // if all wrong
 
-                // if A and B are wrong
-                    // if C is correct
+                        // A vs C, B vs C, C take average (A and B not tie as they both increase)
+                        AChange = this.calculateChange(A, C, TIE);
+                        BChange = this.calculateChange(B, C, TIE);
+                        CvA = -AChange;
+                        CvB = -BChange;
+                        CChange = (CvA + CvB) / 2.0;
 
-
-
-                    // else if C is wrong
-
-
+                    }
+                }
             }
 
         } else {    // if A != B
@@ -87,7 +98,6 @@ public class RatingAPI {
 
 
         }
-
 
         // update ratings for all three
 

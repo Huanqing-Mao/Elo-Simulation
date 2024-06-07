@@ -1,6 +1,6 @@
 Person A1 = new Person("A", 1, 1400, 0.7);
 Person B1 = new Person("B", 1, 1600, 0.8);
-RatingAPI api = new RatingAPI();
+RatingAPI api = new RatingAPI(1);
 
 System.out.println(A1.toString() + " vs " + B1.toString());
 System.out.println("If A wins: ");
