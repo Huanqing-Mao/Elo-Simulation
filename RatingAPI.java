@@ -135,14 +135,9 @@ public class RatingAPI {
         }
 
         // update ratings for all three
-        //System.out.println(String.format("---> Calculated A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
-
+        System.out.println(String.format("---> Calculated Changes for A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
         A.updateRating(AChange);
         B.updateRating(BChange);
         C.updateRating(CChange);
-
-        //System.out.println(A);        
-        //System.out.println(B);        
-        //System.out.println(C);  
     }
 }

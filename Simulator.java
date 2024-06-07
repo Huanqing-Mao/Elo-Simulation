@@ -66,12 +66,17 @@ public class Simulator {
                     api.updateGroupRating(a, b, c, Aanswer, Banswer, Canswer);
                     
                 }
+
+                // add the rating of C after doing NUM_QUESTIONS qns
                 double currRatingOfC = c.getRating();
                 simulator.CRatingDistri.get(c).add(currRatingOfC);
             }
 
         }
 
+
+
+        // summarise data and record percentiles
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         System.out.println("=========== Summary ============");
         System.out.println("NLoop = " + NUM_LOOP);

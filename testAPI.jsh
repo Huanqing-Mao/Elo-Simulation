@@ -145,4 +145,5 @@ for (int i = 0; i < 5; i++) {
     System.out.println("C answer = " + Canswer);
 
     api.updateGroupRating(_A, _B, _C, Aanswer, Banswer, Canswer);
+    System.out.println(String.format("%s, %s, %s", _A, _B, _C));
 };
