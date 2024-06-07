@@ -24,8 +24,12 @@ public class Person {
     }
 
 
-    void updateRating(double changeInRating) {
+    public void updateRating(double changeInRating) {
         this.rating += changeInRating;
+    }
+
+    public void resetRating(double custom) {
+        this.rating = custom;
     }
 
     public int giveAnswer(int correctAnswer) {

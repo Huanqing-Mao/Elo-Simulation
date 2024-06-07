@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class Simulator {
     public static final int NUM_LOOP = 1000;
-    public static final int NUMQUESTIONS = 300;
+    public static final int NUMQUESTIONS = 50;
     public static final int NUM_AB = 30;
     public static final int NUM_C = 9;
     public static final double MIN = 0.5;
@@ -102,6 +102,7 @@ public class Simulator {
         for (Person c : CList) {
             
             for (int i = 0; i < NUM_LOOP; i++) {
+                c.resetRating(1800.0);
 
                 // initialise the list of A and the list of B
                 ArrayList<Person> AList = new ArrayList<Person>();
@@ -118,7 +119,7 @@ public class Simulator {
 
                 
                 for (int j = 0; j < NUMQUESTIONS; j++) {
-                    System.out.println("Qm #" + (j + 1));
+                    //System.out.println("Qm #" + (j + 1));
 
                     // get random A and B
                     int indexA = random.nextInt(NUM_AB);
