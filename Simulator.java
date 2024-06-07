@@ -73,8 +73,11 @@ public class Simulator {
         }
 
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
-
+        System.out.println("=========== Summary ============");
+        System.out.println("NLoop = " + NUM_LOOP);
+        System.out.println("Num QNs = " + NUMQUESTIONS);
         for (Person c : CList) {
+            System.out.println();
             System.out.println(c.toString());
             ArrayList<Double> cPerformance = simulator.CRatingDistri.get(c);
             Collections.sort(cPerformance);
@@ -88,15 +91,11 @@ public class Simulator {
             int perc90 = 9 * length / 10;
             int perc95 = length - length / 20;
             int[] indices = new int[]{perc5, perc20, perc30, perc50, perc70, perc90, perc95};
-            System.out.println(String.format("Lowest = %.3f", cPerformance.get(0)));
-            System.out.println(String.format("5%% Perc = %.3f", cPerformance.get(perc5)));
-            System.out.println(String.format("20%% Perc = %.3f", cPerformance.get(perc20)));
-            System.out.println(String.format("30%% Perc = %.3f", cPerformance.get(perc30)));
-            System.out.println(String.format("50%% Perc = %.3f", cPerformance.get(perc50)));
-            System.out.println(String.format("70%% Perc = %.3f", cPerformance.get(perc70)));
-            System.out.println(String.format("90%% Perc = %.3f", cPerformance.get(perc90)));
-            System.out.println(String.format("95%% Perc = %.3f", cPerformance.get(perc95)));
-            System.out.println(String.format("Highest = %.3f\n", cPerformance.get(length - 1)));
+
+            for (int idx = 0; idx < indices.length; idx++) {
+                System.out.println(String.format("%.3f Percentile = %.3f", 1.0 * indices[idx] / length, cPerformance.get(indices[idx])));
+
+            }
                         
             ArrayList<String> row = new ArrayList<String>();
             row.add("" + c.getAccuracy());

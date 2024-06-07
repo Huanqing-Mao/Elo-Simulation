@@ -1,0 +1,94 @@
+=========== Summary ============
+NLoop = 1000
+Num QNs = 300
+
+Person C1, rating = 1136.197, accuracy = 0.200
+length = 1000
+0.050 Percentile = 1078.854
+0.200 Percentile = 1114.617
+0.300 Percentile = 1125.541
+0.500 Percentile = 1150.160
+0.700 Percentile = 1171.211
+0.900 Percentile = 1206.621
+0.950 Percentile = 1218.651
+
+Person C2, rating = 1166.424, accuracy = 0.300
+length = 1000
+0.050 Percentile = 1141.623
+0.200 Percentile = 1172.392
+0.300 Percentile = 1187.082
+0.500 Percentile = 1209.003
+0.700 Percentile = 1232.771
+0.900 Percentile = 1264.562
+0.950 Percentile = 1280.712
+
+Person C3, rating = 1219.505, accuracy = 0.400
+length = 1000
+0.050 Percentile = 1191.178
+0.200 Percentile = 1228.931
+0.300 Percentile = 1241.990
+0.500 Percentile = 1263.256
+0.700 Percentile = 1286.327
+0.900 Percentile = 1318.280
+0.950 Percentile = 1333.146
+
+Person C4, rating = 1267.897, accuracy = 0.500
+length = 1000
+0.050 Percentile = 1246.503
+0.200 Percentile = 1278.517
+0.300 Percentile = 1289.356
+0.500 Percentile = 1310.447
+0.700 Percentile = 1330.300
+0.900 Percentile = 1361.018
+0.950 Percentile = 1377.200
+
+Person C5, rating = 1402.567, accuracy = 0.600
+length = 1000
+0.050 Percentile = 1295.455
+0.200 Percentile = 1329.411
+0.300 Percentile = 1340.770
+0.500 Percentile = 1357.617
+0.700 Percentile = 1376.305
+0.900 Percentile = 1403.665
+0.950 Percentile = 1421.177
+
+Person C6, rating = 1431.106, accuracy = 0.700
+length = 1000
+0.050 Percentile = 1340.688
+0.200 Percentile = 1371.888
+0.300 Percentile = 1382.869
+0.500 Percentile = 1401.654
+0.700 Percentile = 1421.437
+0.900 Percentile = 1446.848
+0.950 Percentile = 1460.141
+
+Person C7, rating = 1473.588, accuracy = 0.800
+length = 1000
+0.050 Percentile = 1389.437
+0.200 Percentile = 1415.707
+0.300 Percentile = 1428.050
+0.500 Percentile = 1444.343
+0.700 Percentile = 1460.828
+0.900 Percentile = 1483.430
+0.950 Percentile = 1496.507
+
+Person C8, rating = 1483.948, accuracy = 0.900
+length = 1000
+0.050 Percentile = 1443.917
+0.200 Percentile = 1464.641
+0.300 Percentile = 1472.623
+0.500 Percentile = 1486.418
+0.700 Percentile = 1498.775
+0.900 Percentile = 1519.788
+0.950 Percentile = 1529.594
+
+Person C9, rating = 1526.485, accuracy = 1.000
+length = 1000
+0.050 Percentile = 1505.211
+0.200 Percentile = 1516.252
+0.300 Percentile = 1520.155
+0.500 Percentile = 1529.393
+0.700 Percentile = 1537.682
+0.900 Percentile = 1555.089
+0.950 Percentile = 1562.743
+File created successfully.
