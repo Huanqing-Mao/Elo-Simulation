@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 public class Simulator {
     public static final int NUM_LOOP = 1000;
     public static final int NUMQUESTIONS = 300;
+    public static final int NUM_AB = 30;
     public static final double MIN = 0.5;
     public static final double MAX = 0.9;
     public static final int CORRECT_ANSWER = 1;
@@ -41,7 +42,7 @@ public class Simulator {
                 ArrayList<Person> AList = new ArrayList<Person>();
                 ArrayList<Person> BList = new ArrayList<Person>();
                 
-                for (int k = 0; k < 30; k++) {
+                for (int k = 0; k < NUM_AB; k++) {
                     
                     double accuracyA = MIN + (MAX - MIN) * random.nextDouble();
                     double accuracyB = MIN + (MAX - MIN) * random.nextDouble();
@@ -54,8 +55,8 @@ public class Simulator {
                 for (int j = 0; j < NUMQUESTIONS; j++) {
 
                     // get random A and B
-                    int indexA = random.nextInt(30);
-                    int indexB = random.nextInt(30);
+                    int indexA = random.nextInt(NUM_AB);
+                    int indexB = random.nextInt(NUM_AB);
                     Person a = AList.get(indexA);
                     Person b = BList.get(indexB);
 
