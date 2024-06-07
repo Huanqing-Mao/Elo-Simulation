@@ -17,6 +17,70 @@ public class Simulator {
     ArrayList<Person> CList = new ArrayList<Person>();
     HashMap<Person, ArrayList<Double>> CRatingDistri = new HashMap<Person, ArrayList<Double>>();
 
+
+    // export percentile data as a csv file
+    public static void writePercentileFile(String fileName, String[] header, ArrayList<ArrayList<String>> data) {
+        
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            // write header
+            for (int i = 0; i < header.length; i++) {
+                writer.print(header[i]);
+                if (i < header.length - 1) {
+                    writer.print(",");
+                }
+            }
+            writer.println();
+
+
+            // write data
+            for (ArrayList<String> row : data) {
+                for (int i = 0; i < row.size(); i++) {
+                    writer.print(row.get(i));
+                    if (i < row.size() - 1) writer.print(",");
+                }
+                writer.println();
+            }
+
+            System.out.println("File created successfully.");
+            
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    // export final ratings of C into a csv file
+    public static void writeCResults(String fileName, String[] header, double[][] data) {
+        
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            // write header
+            for (int i = 0; i < header.length; i++) {
+                writer.print(header[i]);
+                if (i < header.length - 1) {
+                    writer.print(",");
+                }
+            }
+            writer.println();
+
+
+            // write data
+            for (double[] row : data) {
+                for (int i = 0; i < row.length; i++) {
+                    writer.print(row[i]);
+                    if (i < row.length - 1) writer.print(",");
+                }
+                writer.println();
+            }
+
+            System.out.println("Results File created successfully.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
     public static void main(String[] args) {
 
         // initialise the lists of Person C
@@ -78,11 +142,15 @@ public class Simulator {
 
 
 
-        // summarise data and record percentiles
+        // record and summarise data
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
+        double[][] cValues = new double[NUM_LOOP][NUM_C];
+        String[] accuracies = new String[NUM_C];    
         System.out.println("=========== Summary ============");
         System.out.println("NLoop = " + NUM_LOOP);
         System.out.println("Num QNs = " + NUMQUESTIONS);
+
+        int currPersonIndex = 0;
         for (Person c : CList) {
             System.out.println();
             System.out.println(c.toString());
@@ -103,7 +171,8 @@ public class Simulator {
                 System.out.println(String.format("%.3f Percentile = %.3f", 1.0 * indices[idx] / length, cPerformance.get(indices[idx])));
 
             }
-                        
+
+            // add rows to the percentile data            
             ArrayList<String> row = new ArrayList<String>();
             row.add("" + c.getAccuracy());
             for (int id : indices) {
@@ -112,89 +181,30 @@ public class Simulator {
             
             data.add(row);
 
-        }
 
-        //System.out.println(simulator.CRatingDistri);
-
-        // export percentile data as a csv file
-        String[] header = {"Accuracy", "5% Percentile", "20% Percentile", "30% Percentile", "50% Percentile", "70% Percentile", "90% Percentile", "95% Percentile"};
-        String csvFile = String.format("C Performance Distribution %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
-        try (PrintWriter writer = new PrintWriter(new FileWriter(csvFile))) {
-            // write header
-            for (int i = 0; i < header.length; i++) {
-                writer.print(header[i]);
-                if (i < header.length - 1) {
-                    writer.print(",");
-                }
-            }
-            writer.println();
-
-
-            // write data
-            for (ArrayList<String> row : data) {
-                for (int i = 0; i < row.size(); i++) {
-                    writer.print(row.get(i));
-                    if (i < row.size() - 1) writer.print(",");
-                }
-                writer.println();
-            }
-
-            System.out.println("File created successfully.");
-            
-            
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // export the actual C values
-        double[][] cValues = new double[NUM_LOOP][NUM_C];
-        double[] accuracies = new double[NUM_C];        
-        
-        Iterator<Map.Entry<Person, ArrayList<Double>>> iterator = simulator.CRatingDistri.entrySet().iterator();
-        int curr = 0;
-        while (iterator.hasNext()) {
-            Map.Entry<Person, ArrayList<Double>> entry = iterator.next();
-            Person p = entry.getKey();
-            accuracies[curr] = p.getAccuracy();
-            ArrayList<Double> results = entry.getValue();
+            // add columns to the results data
+            accuracies[currPersonIndex] = String.format("%.1f", c.getAccuracy());
+            ArrayList<Double> results = simulator.CRatingDistri.get(c);
             for (int j = 0; j < results.size();j++) {
                 double rating = results.get(j);
-                cValues[j][curr] = rating;
+                cValues[j][currPersonIndex] = rating;
             }
-
-            curr++;
+            currPersonIndex++;
+            
         }
+
+        // export percentiles
+        String[] header = {"Accuracy", "5% Percentile", "20% Percentile", "30% Percentile", "50% Percentile", "70% Percentile", "90% Percentile", "95% Percentile"};
+        String csvFile = String.format("C Performance Distribution %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
+        writePercentileFile(csvFile, header, data);
+
+        
+        // export the actual C values
+        String resultsFile = "Results File for C.csv";
+        writeCResults(resultsFile, accuracies, cValues);
         
 
-        String resultsFile = "Results File for C.csv";
-        try (PrintWriter writer = new PrintWriter(new FileWriter(resultsFile))) {
-            // write header
-            for (int i = 0; i < accuracies.length; i++) {
-                writer.print(accuracies[i]);
-                if (i < accuracies.length - 1) {
-                    writer.print(",");
-                }
-            }
-            writer.println();
-
-
-            // write data
-            for (double[] row : cValues) {
-                for (int i = 0; i < row.length; i++) {
-                    writer.print(row[i]);
-                    if (i < row.length - 1) writer.print(",");
-                }
-                writer.println();
-            }
-
-            System.out.println("Results File created successfully.");
-            
-            
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        
         
         
 
