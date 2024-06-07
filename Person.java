@@ -1,13 +1,13 @@
 import java.util.*;
 
-class Person {
+public class Person {
 
     private String type;
     private int id;
     private double rating;
     private double accuracy;
 
-    Person(String type, int id, double rating, double accuracy) {
+    public Person(String type, int id, double rating, double accuracy) {
         this.type = type;
         this.rating = rating;
         this.id = id;
@@ -15,11 +15,11 @@ class Person {
     }
 
 
-    double getRating() {
+    public double getRating() {
         return this.rating;
     }
 
-    double getAccuracy() {
+    public double getAccuracy() {
         return this.accuracy;
     }
 
@@ -28,7 +28,7 @@ class Person {
         this.rating += changeInRating;
     }
 
-    int giveAnswer(int correctAnswer) {
+    public int giveAnswer(int correctAnswer) {
         Random random = new Random();
 
         if (random.nextDouble() < this.accuracy) { // random next double has a range 0 - 1
