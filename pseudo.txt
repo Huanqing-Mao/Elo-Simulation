@@ -24,6 +24,7 @@ class Person: // encapsulate each Person's information
     
     methods:
         - toString
+        - int giverAnswer(int solution)
         - void updateRating(double changeInRating)
 
 class RatingAPI: // calculate and update ratings for the given people
@@ -32,5 +33,4 @@ class RatingAPI: // calculate and update ratings for the given people
         - final constant = 400
     methods:
         - double calculateChange(Person1, Person2, result1)
-        - void updateRatingInspect(A, B, C, isAcorr, isBcorr, isCcorr) // if C is inspected
-        - void updateRatingNoInspect(A, B, isAcorr, isBcorr) // if C is not inspected
+        - void updateRatingInspect(A, B, C,answer for each person)
