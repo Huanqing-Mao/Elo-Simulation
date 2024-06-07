@@ -136,14 +136,16 @@ Person _B = new Person("B", 9, 1600, 0.8);
 Person _C = new Person("C", 9, 1800, 0.9);
 
 for (int i = 0; i < 5; i++) {
-    System.out.println("\nRound #" + (i + 1));
+    //System.out.println("\nRound #" + (i + 1));
     int Aanswer = _A.giveAnswer(CORRECT_ANSWER);
     int Banswer = _B.giveAnswer(CORRECT_ANSWER);
     int Canswer = _C.giveAnswer(CORRECT_ANSWER);
-    System.out.println("A answer = " + Aanswer);
-    System.out.println("B answer = " + Banswer);
-    System.out.println("C answer = " + Canswer);
+    //System.out.println("A answer = " + Aanswer);
+    //System.out.println("B answer = " + Banswer);
+    //System.out.println("C answer = " + Canswer);
 
     api.updateGroupRating(_A, _B, _C, Aanswer, Banswer, Canswer);
-    System.out.println(String.format("%s, %s, %s", _A, _B, _C));
+    //System.out.println(String.format("%s, %s, %s", _A, _B, _C));
 };
+
+System.out.println(String.format("%s, %s, %s", _A, _B, _C));

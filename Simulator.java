@@ -118,6 +118,7 @@ public class Simulator {
 
                 
                 for (int j = 0; j < NUMQUESTIONS; j++) {
+                    System.out.println("Qm #" + (j + 1));
 
                     // get random A and B
                     int indexA = random.nextInt(NUM_AB);
