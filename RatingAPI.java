@@ -47,11 +47,8 @@ public class RatingAPI {
 
             } else {    // if A = B != C
                 
-
-                
                 if (Aanswer == correctAnswer && Canswer != correctAnswer) {   // if A and B are correct, then C is wrong
                   
-
                     // A and B are tie, A vs C and B vs C, C take average
                     CvA = this.calculateChange(C, A, LOSE);
                     CvB = this.calculateChange(C, B, LOSE);
@@ -59,17 +56,14 @@ public class RatingAPI {
 
                 } else if (Aanswer != correctAnswer) {    // if A and B are wrong
                     
-                       
                     if (Canswer == correctAnswer) {    // if C is correct
-                        
                         
                         // A and B are tie, A vs C and B vs C, C take average
                         CvA = this.calculateChange(C, A, WIN);
                         CvB = this.calculateChange(C, B, WIN);
                         CChange = (CvA + CvB) / 2.0;
 
-                    } else {    // if all wrong
-                       
+                    } else {    // if all wrong                       
 
                         // A vs C, B vs C, C take average (A and B not tie as they both increase)
                         AChange = this.calculateChange(A, C, TIE);
@@ -86,12 +80,9 @@ public class RatingAPI {
 
             if (!(Aanswer != Banswer && Banswer != Canswer)) {    // if not all different
                
-
                 if (Canswer == this.correctAnswer) {    // if C is correct, A vs B, C no change
-                    
 
                     if (Aanswer == Canswer && Aanswer == correctAnswer) {    // if A is correct, A win
-                        
                         AChange = this.calculateChange(A, B, WIN);
                         BChange = this.calculateChange(B, A, LOSE);
 
@@ -103,7 +94,6 @@ public class RatingAPI {
                     }
         
                 } else {    // if C is wrong
-                    
 
                     if (Aanswer != this.correctAnswer && Banswer !=this.correctAnswer && Canswer != this.correctAnswer) {    // if all wrong, all tie
 
@@ -116,7 +106,6 @@ public class RatingAPI {
 
                     } else {  // C loses, C compare w winner, other loser compare w winner, winner take average
 
-                        
                         if (Aanswer == this.correctAnswer) {    // if A correct, B = C
                             
                             
@@ -146,14 +135,14 @@ public class RatingAPI {
         }
 
         // update ratings for all three
-        System.out.println(String.format("---> Calculated A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
+        //System.out.println(String.format("---> Calculated A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
 
         A.updateRating(AChange);
         B.updateRating(BChange);
         C.updateRating(CChange);
 
-        System.out.println(A);        
-        System.out.println(B);        
-        System.out.println(C);  
+        //System.out.println(A);        
+        //System.out.println(B);        
+        //System.out.println(C);  
     }
 }
