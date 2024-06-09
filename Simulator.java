@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 
 public class Simulator {
     public static final int NUM_LOOP = 1000;
-    public static final int NUMQUESTIONS = 50;
+    public static final int NUMQUESTIONS = 300;
     public static final int NUM_AB = 30;
     public static final int NUM_C = 9;
     public static final double MIN = 0.5;
