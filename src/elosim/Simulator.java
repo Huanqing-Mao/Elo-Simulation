@@ -203,12 +203,12 @@ class Simulator {
 
         // export percentiles
         String[] header = {"Accuracy", "5% Percentile", "20% Percentile", "30% Percentile", "50% Percentile", "70% Percentile", "90% Percentile", "95% Percentile"};
-        String csvFile = String.format("C Performance Distribution %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
+        String csvFile = String.format("data/C Performance Distribution %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         writePercentileFile(csvFile, header, data);
 
         
         // export the actual C values
-        String resultsFile = String.format("Actual Results %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
+        String resultsFile = String.format("data/Actual Results %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         writeCResults(resultsFile, accuracies, cValues);
         
 
