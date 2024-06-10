@@ -1,9 +1,9 @@
 # Compile Files: 
-`javac elosim/*.java
+`javac elosim/*.java`
 
 
 # Running the Simulator
-java elosim.Simulator`
+`java elosim.Simulator`
 
 Input two integers
 `NUM_LOOP NUMQUESTIONS`
