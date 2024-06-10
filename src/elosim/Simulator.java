@@ -1,11 +1,13 @@
+package elosim;
+
 import java.util.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class Simulator {
-    public static final int NUM_LOOP = 1000;
-    public static final int NUMQUESTIONS = 300;
+class Simulator {
+    public static int NUM_LOOP;
+    public static int NUMQUESTIONS;
     public static final int NUM_AB = 30;
     public static final int NUM_C = 9;
     public static final double MIN = 0.5;
@@ -82,6 +84,10 @@ public class Simulator {
     }
 
     public static void main(String[] args) {
+        // custom NUM LOOP and NUM QUESTIONS
+        Scanner sc = new Scanner(System.in);
+        NUM_LOOP = sc.nextInt();
+        NUMQUESTIONS = sc.nextInt();
 
         // initialise the lists of Person C
         ArrayList<Person> CList = new ArrayList<Person>();
@@ -176,7 +182,7 @@ public class Simulator {
 
             // add rows to the percentile data            
             ArrayList<String> row = new ArrayList<String>();
-            row.add("" + c.getAccuracy());
+            row.add(String.format("%.1f", c.getAccuracy()));
             for (int id : indices) {
                 row.add("" + cPerformance.get(id));
             }
@@ -202,7 +208,7 @@ public class Simulator {
 
         
         // export the actual C values
-        String resultsFile = "Results File for C.csv";
+        String resultsFile = String.format("Actual Results %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         writeCResults(resultsFile, accuracies, cValues);
         
 

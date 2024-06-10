@@ -1,4 +1,6 @@
-public class RatingAPI {
+package elosim;
+
+class RatingAPI {
     public static final double K = 40.0;
     public static final double CONSTANT = 400.0;
     public static final double WIN = 1.0;
@@ -6,7 +8,7 @@ public class RatingAPI {
     public static final double TIE = 0.5;
     private final int correctAnswer;
 
-    public RatingAPI(int correctAnswer) {
+    RatingAPI(int correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
@@ -18,7 +20,7 @@ public class RatingAPI {
     }
     
     // if C is inspected
-    public void updateGroupRating(Person A, Person B, Person C, int Aanswer, int Banswer, int Canswer) {
+    void updateGroupRating(Person A, Person B, Person C, int Aanswer, int Banswer, int Canswer) {
         // 0.2 chance of C being inspected (ADD LATER), if C not inspected, only A and B are compared for both cased
         // here assumes C is inspected:
 

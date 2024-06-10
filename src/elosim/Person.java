@@ -1,13 +1,15 @@
+package elosim;
+
 import java.util.*;
 
-public class Person {
+class Person {
 
     private String type;
     private int id;
     private double rating;
     private double accuracy;
 
-    public Person(String type, int id, double rating, double accuracy) {
+    Person(String type, int id, double rating, double accuracy) {
         this.type = type;
         this.rating = rating;
         this.id = id;
@@ -15,11 +17,11 @@ public class Person {
     }
 
 
-    public double getRating() {
+    double getRating() {
         return this.rating;
     }
 
-    public double getAccuracy() {
+    double getAccuracy() {
         return this.accuracy;
     }
 
@@ -28,11 +30,11 @@ public class Person {
         this.rating += changeInRating;
     }
 
-    public void resetRating(double custom) {
+    void resetRating(double custom) {
         this.rating = custom;
     }
 
-    public int giveAnswer(int correctAnswer) {
+    int giveAnswer(int correctAnswer) {
         Random random = new Random();
 
         if (random.nextDouble() < this.accuracy) { // random next double has a range 0 - 1
