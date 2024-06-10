@@ -1,4 +1,4 @@
-package elosim;
+package elosim; // comment this to use testPerson.jsh or testAPI.jsh
 
 class RatingAPI {
     public static final double K = 40.0;
