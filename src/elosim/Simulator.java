@@ -13,6 +13,9 @@ class Simulator {
     public static final double MIN = 0.5;
     public static final double MAX = 0.9;
     public static final int CORRECT_ANSWER = 1;
+    public static final double A_DEFAULT = 1400.0;
+    public static final double B_DEFAULT = 1600.0;
+    public static final double C_DEFAULT = 1800.0;
 
     ArrayList<Person> AList = new ArrayList<Person>();
     ArrayList<Person> BList = new ArrayList<Person>();
@@ -98,7 +101,7 @@ class Simulator {
 
         for (int j = 0; j < NUM_C; j++) {
             double accuracyC = 0.2 + 0.1 * j;
-            Person c = new Person("C", j + 1, 1800.0, accuracyC);
+            Person c = new Person("C", j + 1, C_DEFAULT, accuracyC);
             CList.add(c);
             simulator.CRatingDistri.put(c, new ArrayList<Double>());
         }
@@ -108,7 +111,7 @@ class Simulator {
         for (Person c : CList) {
             
             for (int i = 0; i < NUM_LOOP; i++) {
-                c.resetRating(1800.0);
+                c.resetRating(C_DEFAULT);
 
                 // initialise the list of A and the list of B
                 ArrayList<Person> AList = new ArrayList<Person>();
@@ -118,8 +121,8 @@ class Simulator {
                     
                     double accuracyA = MIN + (MAX - MIN) * random.nextDouble();
                     double accuracyB = MIN + (MAX - MIN) * random.nextDouble();
-                    AList.add(new Person("A", k + 1, 1400.0, accuracyA));
-                    BList.add(new Person("B", k + 1, 1600.0, accuracyB));
+                    AList.add(new Person("A", k + 1, A_DEFAULT, accuracyA));
+                    BList.add(new Person("B", k + 1, B_DEFAULT, accuracyB));
                    
                 }
 
