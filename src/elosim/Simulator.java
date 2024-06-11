@@ -9,7 +9,7 @@ class Simulator {
     public static int NUM_LOOP;
     public static int NUMQUESTIONS;
     public static final int NUM_AB = 30;
-    public static final int NUM_C = 9;
+    public static final int NUM_C = 11;
     public static final double MEAN = 0.7;
     public static final double STD = 1.0;
     public static final double MIN = 0.4;
@@ -121,12 +121,25 @@ class Simulator {
         RatingAPI api = new RatingAPI(CORRECT_ANSWER);
        
 
-        for (int j = 0; j < NUM_C; j++) {
+        for (int j = 0; j < NUM_C - 3; j++) {
             double accuracyC = 0.2 + 0.1 * j;
             Person c = new Person("C", j + 1, C_DEFAULT, accuracyC);
             CList.add(c);
             simulator.CRatingDistri.put(c, new ArrayList<Double>());
         }
+
+        // Add C = 0.95 and C = 0.99
+        Person c95 = new Person("C", NUM_C - 2, C_DEFAULT, 0.95);
+        Person c99 = new Person("C", NUM_C - 1, C_DEFAULT, 0.99);
+        Person c100 = new Person("C", NUM_C, C_DEFAULT, 1.0);
+
+        CList.add(c95);
+        CList.add(c99);
+        CList.add(c100);
+        simulator.CRatingDistri.put(c95, new ArrayList<Double>());
+        simulator.CRatingDistri.put(c99, new ArrayList<Double>());
+        simulator.CRatingDistri.put(c100, new ArrayList<Double>());
+
 
 
         // get distribution for each C
@@ -198,7 +211,7 @@ class Simulator {
 
             // add rows to the percentile data            
             ArrayList<String> row = new ArrayList<String>();
-            row.add(String.format("%.1f", c.getAccuracy()));
+            row.add(String.format("%.3f", c.getAccuracy()));
             for (int id : indices) {
                 row.add("" + cPerformance.get(id));
             }
@@ -207,7 +220,7 @@ class Simulator {
 
 
             // add columns to the results data
-            accuracies[currPersonIndex] = String.format("%.1f", c.getAccuracy());
+            accuracies[currPersonIndex] = String.format("%.3f", c.getAccuracy());
             ArrayList<Double> results = simulator.CRatingDistri.get(c);
             for (int j = 0; j < results.size();j++) {
                 double rating = results.get(j);
