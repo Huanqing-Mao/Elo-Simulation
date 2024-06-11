@@ -45,11 +45,8 @@ class RatingAPI {
             // 20 % chance of C being inspected
             if (inspection <= C_INSPECTION_RATE) { // C is inspected
                 
-                if (Aanswer == Canswer) {   // if A = B = C, A and B are tie, ***NO CHANGE TO C 
-                
-                    //CvA = this.calculateChange(C, A, TIE);
-                    //CvB = this.calculateChange(C, B, TIE);
-                    //CChange = (CvA + CvB) / 2.0; //  no tie
+                if (Aanswer == Canswer) { // if A = B = C, A and B are tie, ***NO CHANGE TO C 
+                    // do nothing
     
                 } else {    // if A = B != C
                     
@@ -67,7 +64,7 @@ class RatingAPI {
                             // A and B are tie, A vs C and B vs C, C take average
                             CvA = this.calculateChange(C, A, WIN);
                             CvB = this.calculateChange(C, B, WIN);
-                            CChange = CvA + CvB; // if c is correct, CvA + CvB vice versa
+                            CChange = CvA + CvB; // ***NO TAKING AVERAGE
     
                         } else {    // if all wrong                       
     
@@ -124,7 +121,7 @@ class RatingAPI {
                             BChange = this.calculateChange(B, C, TIE);
                             double CvA = -AChange;
                             double CvB = -BChange;
-                            CChange = CvA + CvB; // don't take average, but C change = CvA + CvB***
+                            CChange = CvA + CvB; // ***NO TAKING AVERAGE
     
                         } else {  // C loses, C compare w winner, other loser compare w winner, winner take average
     
@@ -136,7 +133,7 @@ class RatingAPI {
     
                                 double AvB = this.calculateChange(A, B, WIN);
                                 double AvC = this.calculateChange(A, C, WIN);
-                                AChange = AvB + AvC; // don't take average
+                                AChange = AvB + AvC; // ***NO TAKING AVERAGE
     
     
                             } else if (Banswer == this.correctAnswer) {    // if B correct, A = C
@@ -146,7 +143,7 @@ class RatingAPI {
     
                                 double BvA = this.calculateChange(B, A, WIN);
                                 double BvC = this.calculateChange(B, C, WIN);
-                                BChange = BvA + BvC;
+                                BChange = BvA + BvC; // ***NO TAKING AVERAGE
     
                             }
     
