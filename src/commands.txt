@@ -1,0 +1,2 @@
+javac elosim/*.java
+java elosim.Simulator
