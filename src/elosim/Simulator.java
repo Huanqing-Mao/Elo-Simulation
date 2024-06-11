@@ -121,11 +121,10 @@ class Simulator {
                     AList.add(new Person("A", k + 1, 1400.0, accuracyA));
                     BList.add(new Person("B", k + 1, 1600.0, accuracyB));
                    
-                };
+                }
 
-                
+                // simulate A, B, C answering custom number of questions
                 for (int j = 0; j < NUMQUESTIONS; j++) {
-                    //System.out.println("Qm #" + (j + 1));
 
                     // get random A and B
                     int indexA = random.nextInt(NUM_AB);
@@ -141,7 +140,7 @@ class Simulator {
                     
                 }
 
-                // add the rating of C after doing NUM_QUESTIONS qns
+                // add the rating of C after doing NUM_QUESTIONS qns to the hashmap
                 double currRatingOfC = c.getRating();
                 simulator.CRatingDistri.get(c).add(currRatingOfC);
             }
