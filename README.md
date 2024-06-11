@@ -1,4 +1,5 @@
 ### Compile Files: 
+`cd directory/to/the/src`
 `javac elosim/*.java`
 
 
