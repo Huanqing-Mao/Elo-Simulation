@@ -137,7 +137,7 @@ class Simulator {
 
                 // initialise the list of A and the list of B
                 ArrayList<Person> AList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "A", A_DEFAULT);
-                ArrayList<Person> BList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "B", A_DEFAULT);
+                ArrayList<Person> BList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "B", B_DEFAULT);
                 
 
                 // simulate A, B, C answering custom number of questions
