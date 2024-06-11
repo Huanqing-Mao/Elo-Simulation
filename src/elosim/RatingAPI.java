@@ -1,5 +1,7 @@
 package elosim; // comment this to use testPerson.jsh or testAPI.jsh
 
+import java.util.*;
+
 class RatingAPI {
     public static final double K = 40.0;
     public static final double CONSTANT = 400.0;
@@ -12,7 +14,7 @@ class RatingAPI {
         this.correctAnswer = correctAnswer;
     }
 
-    double calculateChange(Person person1, Person person2, double resultOfPerson1) { // Elo formula
+    double calculateChange(Person person1, Person person2, double resultOfPerson1) { // Elo formula for person 1
         double power = (person2.getRating() - person1.getRating()) / CONSTANT;
         double expected = 1.0 /(Math.pow(10.0, power) + 1);
         double change = K * (resultOfPerson1 - expected);
@@ -21,125 +23,152 @@ class RatingAPI {
     
     // if C is inspected
     void updateGroupRating(Person A, Person B, Person C, int Aanswer, int Banswer, int Canswer) {
-        // 0.2 chance of C being inspected (ADD LATER), if C not inspected, only A and B are compared for both cased
-        // here assumes C is inspected:
 
+        // initialise the changes to 0
         double AChange = 0.0;
         double BChange = 0.0;
         double CChange = 0.0;
-
         
-        if (Aanswer == Banswer) {   // if A == B
-            
-            // initialise A and B as tie : A vs B
-            AChange = this.calculateChange(A, B, TIE);
-            BChange = this.calculateChange(B, A, TIE);
+        double inspection = new Random().nextDouble();
 
-            double CvA = 0.0;
-            double CvB = 0.0;
+        // double inspection = 0.0; // for testing of main logic: if we assume C to be 100 % inspected
 
-            
-            if (Aanswer == Canswer) {   // if A = B = C, A and B are tie, A vs C and B vs C, C take average
-            
+        if (inspection <= 0.2) { // C is inspected
+            // System.out.println("C is inspected.");
+            if (Aanswer == Banswer) {   // if A == B
                 
-                CvA = this.calculateChange(C, A, TIE);
-                CvB = this.calculateChange(C, B, TIE);
-                CChange = (CvA + CvB) / 2.0;
+                // initialise A and B as tie : A vs B
+                AChange = this.calculateChange(A, B, TIE);
+                BChange = this.calculateChange(B, A, TIE);
 
+                double CvA = 0.0;
+                double CvB = 0.0;
 
-            } else {    // if A = B != C
                 
-                if (Aanswer == correctAnswer && Canswer != correctAnswer) {   // if A and B are correct, then C is wrong
-                  
-                    // A and B are tie, A vs C and B vs C, C take average
-                    CvA = this.calculateChange(C, A, LOSE);
-                    CvB = this.calculateChange(C, B, LOSE);
+                if (Aanswer == Canswer) {   // if A = B = C, A and B are tie, A vs C and B vs C, C take average
+                
+                    
+                    CvA = this.calculateChange(C, A, TIE);
+                    CvB = this.calculateChange(C, B, TIE);
                     CChange = (CvA + CvB) / 2.0;
 
-                } else if (Aanswer != correctAnswer) {    // if A and B are wrong
+
+                } else {    // if A = B != C
                     
-                    if (Canswer == correctAnswer) {    // if C is correct
-                        
+                    if (Aanswer == correctAnswer && Canswer != correctAnswer) {   // if A and B are correct, then C is wrong
+                    
                         // A and B are tie, A vs C and B vs C, C take average
-                        CvA = this.calculateChange(C, A, WIN);
-                        CvB = this.calculateChange(C, B, WIN);
+                        CvA = this.calculateChange(C, A, LOSE);
+                        CvB = this.calculateChange(C, B, LOSE);
                         CChange = (CvA + CvB) / 2.0;
 
-                    } else {    // if all wrong                       
-
-                        // A vs C, B vs C, C take average (A and B not tie as they both increase)
-                        AChange = this.calculateChange(A, C, TIE);
-                        BChange = this.calculateChange(B, C, TIE);
-                        CvA = -AChange;
-                        CvB = -BChange;
-                        CChange = (CvA + CvB) / 2.0;
-
-                    }
-                }
-            }
-
-        } else {    // if A != B, if all different, no updates
-
-            if (!(Aanswer != Banswer && Banswer != Canswer)) {    // if not all different
-               
-                if (Canswer == this.correctAnswer) {    // if C is correct, A vs B, C no change
-
-                    if (Aanswer == Canswer && Aanswer == correctAnswer) {    // if A is correct, A win
-                        AChange = this.calculateChange(A, B, WIN);
-                        BChange = this.calculateChange(B, A, LOSE);
-
-                    } else if (Banswer == Canswer && Banswer == correctAnswer) {    // if B is correct, B win
+                    } else if (Aanswer != correctAnswer) {    // if A and B are wrong
                         
-                        AChange = this.calculateChange(A, B, LOSE);
-                        BChange = this.calculateChange(B, A, WIN);
-
-                    }
-        
-                } else {    // if C is wrong
-
-                    if (Aanswer != this.correctAnswer && Banswer !=this.correctAnswer && Canswer != this.correctAnswer) {    // if all wrong, all tie
-
-                        // A vs C, B vs C, C take average (A and B not tie as they both increase)
-                        AChange = this.calculateChange(A, C, TIE);
-                        BChange = this.calculateChange(B, C, TIE);
-                        double CvA = -AChange;
-                        double CvB = -BChange;
-                        CChange = (CvA + CvB) / 2.0;
-
-                    } else {  // C loses, C compare w winner, other loser compare w winner, winner take average
-
-                        if (Aanswer == this.correctAnswer) {    // if A correct, B = C
+                        if (Canswer == correctAnswer) {    // if C is correct
                             
-                            
-                            BChange = this.calculateChange(B, A, LOSE);
-                            CChange = this.calculateChange(C, A, LOSE);
+                            // A and B are tie, A vs C and B vs C, C take average
+                            CvA = this.calculateChange(C, A, WIN);
+                            CvB = this.calculateChange(C, B, WIN);
+                            CChange = (CvA + CvB) / 2.0;
 
-                            double AvB = this.calculateChange(A, B, WIN);
-                            double AvC = this.calculateChange(A, C, WIN);
-                            AChange = (AvB + AvC) / 2.0;
+                        } else {    // if all wrong                       
 
-
-                        } else if (Banswer == this.correctAnswer) {    // if B correct, A = C
-
-                            AChange = this.calculateChange(A, B, LOSE);
-                            CChange = this.calculateChange(C, B, LOSE);
-
-                            double BvA = this.calculateChange(B, A, WIN);
-                            double BvC = this.calculateChange(B, C, WIN);
-                            BChange = (BvA + BvC) / 2.0;
+                            // A vs C, B vs C, C take average (A and B not tie as they both increase)
+                            AChange = this.calculateChange(A, C, TIE);
+                            BChange = this.calculateChange(B, C, TIE);
+                            CvA = -AChange;
+                            CvB = -BChange;
+                            CChange = (CvA + CvB) / 2.0;
 
                         }
-
                     }
                 }
+
+            } else {    // if A != B, if all different, no updates
+
+                if (!(Aanswer != Banswer && Banswer != Canswer)) {    // if not all different
+                
+                    if (Canswer == this.correctAnswer) {    // if C is correct, A vs B, C no change
+
+                        if (Aanswer == Canswer && Aanswer == correctAnswer) {    // if A is correct, A win
+                            AChange = this.calculateChange(A, B, WIN);
+                            BChange = this.calculateChange(B, A, LOSE);
+
+                        } else if (Banswer == Canswer && Banswer == correctAnswer) {    // if B is correct, B win
+                            
+                            AChange = this.calculateChange(A, B, LOSE);
+                            BChange = this.calculateChange(B, A, WIN);
+
+                        }
+            
+                    } else {    // if C is wrong
+
+                        if (Aanswer != this.correctAnswer && Banswer !=this.correctAnswer && Canswer != this.correctAnswer) {    // if all wrong, all tie
+
+                            // A vs C, B vs C, C take average (A and B not tie as they both increase)
+                            AChange = this.calculateChange(A, C, TIE);
+                            BChange = this.calculateChange(B, C, TIE);
+                            double CvA = -AChange;
+                            double CvB = -BChange;
+                            CChange = (CvA + CvB) / 2.0;
+
+                        } else {  // C loses, C compare w winner, other loser compare w winner, winner take average
+
+                            if (Aanswer == this.correctAnswer) {    // if A correct, B = C
+                                
+                                
+                                BChange = this.calculateChange(B, A, LOSE);
+                                CChange = this.calculateChange(C, A, LOSE);
+
+                                double AvB = this.calculateChange(A, B, WIN);
+                                double AvC = this.calculateChange(A, C, WIN);
+                                AChange = (AvB + AvC) / 2.0;
+
+
+                            } else if (Banswer == this.correctAnswer) {    // if B correct, A = C
+
+                                AChange = this.calculateChange(A, B, LOSE);
+                                CChange = this.calculateChange(C, B, LOSE);
+
+                                double BvA = this.calculateChange(B, A, WIN);
+                                double BvC = this.calculateChange(B, C, WIN);
+                                BChange = (BvA + BvC) / 2.0;
+
+                            }
+
+                        }
+                    }
+                }
+
             }
 
+
+        } else { // C is not inspected, only A and B are compared to C's answer, C doesn't change
+            // System.out.println("C is not inspected.");
+
+            if (Aanswer == Banswer) { // same answer will always tie -> both correct or both wrong
+                AChange = this.calculateChange(A, B, TIE);
+                BChange = this.calculateChange(B, A, TIE);
+            } else if (Aanswer != Canswer && Banswer != Canswer) { // neither of them equals C -> both wrong
+                AChange = this.calculateChange(A, B, TIE);
+                BChange = this.calculateChange(B, A, TIE);
+            } else if (Aanswer == Canswer && Banswer != Canswer) { // A correct, B wrong
+                AChange = this.calculateChange(A, B, WIN);
+                BChange = this.calculateChange(B, A, LOSE);
+            } else if (Banswer == Canswer && Aanswer != Canswer) { // B correct, A wrong
+                AChange = this.calculateChange(A, B, LOSE);
+                BChange = this.calculateChange(B, A, WIN);
+
+            }
+
+
         }
+
 
         // update ratings for all three
 
         // uncomment to test output for individual output
-        //System.out.println(String.format("---> Calculated Changes for A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
+        // System.out.println(String.format("---> Calculated Changes for A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
         A.updateRating(AChange);
         B.updateRating(BChange);
         C.updateRating(CChange);

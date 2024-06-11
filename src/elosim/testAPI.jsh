@@ -21,7 +21,7 @@ System.out.println(" - A change = " + changeATie + ", B change = " + changeBTie)
 
 
 Person C1 = new Person("C", 1, 1800, 0.9);
-System.out.println("\n====== All Possible Cases Test (Unit Test) ======");
+System.out.println("\n====== All Possible Cases Test (Unit Test) for C under Inspection ======");
 double expectedA;
 double expectedB;
 double expectedC;
