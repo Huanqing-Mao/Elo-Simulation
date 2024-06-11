@@ -24,6 +24,7 @@ class Simulator {
     ArrayList<Person> BList = new ArrayList<Person>();
     ArrayList<Person> CList = new ArrayList<Person>();
     HashMap<Person, ArrayList<Double>> CRatingDistri = new HashMap<Person, ArrayList<Double>>();
+    /* TO-DO: Create HashMap for A and B */
 
 
     // generate normal distributions
