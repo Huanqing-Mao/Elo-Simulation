@@ -7,14 +7,15 @@ double max = 0.9;
 double sum = 0.0;
 int correctAnwer = 1;
 
+
 /* Test Mean Accuracy of Group */
 System.out.println("=== Test Average Accuracy For Person Group vs Expected 70 % ===");
 // generate 30 A
-ArrayList<Person> AList = new ArrayList<Person>();
+ArrayList<Person> AList = Simulator.generateNormalDistributionPerson(0.7, 1.0, 30, "A", 1400.0);
 for (int i = 0; i < 30; i++) {
-    double accuracy = min + (max - min) * random.nextDouble();
-    AList.add(new Person("A", i + 1, 1400, accuracy));
-    sum += accuracy;
+    // double accuracy = min + (max - min) * random.nextDouble();
+    // AList.add(new Person("A", i + 1, 1400, accuracy));
+    sum += AList.get(i).getAccuracy();
 };
 
 // test against 0.7

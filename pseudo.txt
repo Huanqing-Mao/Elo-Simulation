@@ -3,8 +3,9 @@ C[] -> 8 C of accuracy between 0.2 to 0.9
 Main loop -> Simulator class
 for each C:
     for i in 1000: // in each new loop, reset the C's rating to 1800 as it is another independent experiment
-        A[] -> 30 A of accuracy between 0.5 to 0.9
-        B[] -> 30 B of accuracy between 0.5 to 0.9
+        A[] -> 30 A of accuracy between 0.4 to 1.0, norm distri.
+        B[] -> 30 A of accuracy between 0.4 to 1.0, norm distri.
+        
 
         for j in 300: // custom number of questions
             in each question
@@ -33,3 +34,9 @@ class RatingAPI: // calculate and update ratings for the given people
     methods:
         - double calculateChange(Person1, Person2, result1)
         - void updateRating(A, B, C,answer for each person)
+
+
+*** CHANGES IN RATING LOGIC
+- if A = B, all 3 are correct -> C keeps constant
+- C can be inspected when A != B 
+- the person compared twice will add/subtract twice, no more taking average

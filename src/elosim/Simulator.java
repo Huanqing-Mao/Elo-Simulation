@@ -10,8 +10,11 @@ class Simulator {
     public static int NUMQUESTIONS;
     public static final int NUM_AB = 30;
     public static final int NUM_C = 9;
-    public static final double MIN = 0.5;
-    public static final double MAX = 0.9;
+    public static final double MEAN = 0.7;
+    public static final double STD = 1.0;
+    public static final double MIN = 0.4;
+    public static final double MAX = 1.0;
+    
     public static final int CORRECT_ANSWER = 1;
     public static final double A_DEFAULT = 1400.0;
     public static final double B_DEFAULT = 1600.0;
@@ -21,6 +24,25 @@ class Simulator {
     ArrayList<Person> BList = new ArrayList<Person>();
     ArrayList<Person> CList = new ArrayList<Person>();
     HashMap<Person, ArrayList<Double>> CRatingDistri = new HashMap<Person, ArrayList<Double>>();
+
+
+    // generate normal distributions
+    public static ArrayList<Person> generateNormalDistributionPerson(double mean, double stdDev, int numPoints, String type, double initialRating) {
+        Random random = new Random();
+        ArrayList<Person> people = new ArrayList<Person>();
+
+        int counter = 0;
+        
+        while (counter < numPoints) {
+            double assignedAccuracy = mean + stdDev * random.nextGaussian();
+            if (assignedAccuracy >= MIN && assignedAccuracy <= MAX) {
+                people.add(new Person(type, counter + 1, initialRating, assignedAccuracy));
+                counter++;
+            }
+        }
+        
+        return people;
+    }
 
 
     // export percentile data as a csv file
@@ -114,17 +136,9 @@ class Simulator {
                 c.resetRating(C_DEFAULT);
 
                 // initialise the list of A and the list of B
-                ArrayList<Person> AList = new ArrayList<Person>();
-                ArrayList<Person> BList = new ArrayList<Person>();
+                ArrayList<Person> AList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "A", A_DEFAULT);
+                ArrayList<Person> BList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "B", A_DEFAULT);
                 
-                for (int k = 0; k < NUM_AB; k++) {
-                    
-                    double accuracyA = MIN + (MAX - MIN) * random.nextDouble();
-                    double accuracyB = MIN + (MAX - MIN) * random.nextDouble();
-                    AList.add(new Person("A", k + 1, A_DEFAULT, accuracyA));
-                    BList.add(new Person("B", k + 1, B_DEFAULT, accuracyB));
-                   
-                }
 
                 // simulate A, B, C answering custom number of questions
                 for (int j = 0; j < NUMQUESTIONS; j++) {
@@ -151,7 +165,7 @@ class Simulator {
         }
 
 
-
+        
         // record and summarise data
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         double[][] cValues = new double[NUM_LOOP][NUM_C];
@@ -212,7 +226,6 @@ class Simulator {
         // export the actual C values
         String resultsFile = String.format("data/Actual Results %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         writeCResults(resultsFile, accuracies, cValues);
-        
 
         
         
