@@ -8,6 +8,7 @@ class RatingAPI {
     public static final double WIN = 1.0;
     public static final double LOSE = 0.0;
     public static final double TIE = 0.5;
+    public static final double C_INSPECTION_RATE = 0.2;
     private final int correctAnswer;
 
     RatingAPI(int correctAnswer) {
@@ -33,7 +34,7 @@ class RatingAPI {
 
         // double inspection = 0.0; // for testing of main logic: if we assume C to be 100 % inspected
 
-        if (inspection <= 0.2) { // C is inspected
+        if (inspection <= C_INSPECTION_RATE) { // C is inspected
             // System.out.println("C is inspected.");
             if (Aanswer == Banswer) {   // if A == B
                 
