@@ -1,5 +1,5 @@
 Person A1 = new Person("A", 1, 1400, 0.7);
-Person B1 = new Person("B", 1, 1600, 0.8);
+Person B1 = new Person("B", 1, 1400, 0.8);
 RatingAPI api = new RatingAPI(1);
 int CORRECT_ANSWER = 1;
 
@@ -43,7 +43,7 @@ System.out.println("\n #2 A = B = C, All wrong");
 int a2 = 4;
 int b2 = 4;
 int c2 = 4;
-api.updateGroupRating(new Person("A", 2, 1400.0, 0.5), new Person("B", 2, 1600.0, 0.8), new Person("C", 2, 1800.0, 0.9), a2, b2, c2);
+api.updateGroupRating(new Person("A", 2, 1400.0, 0.5), new Person("B", 2, 1400.0, 0.8), new Person("C", 2, 1800.0, 0.9), a2, b2, c2);
 
 // Calculate expected results using Elo Calculator 
 expectedA = 10.4; 
@@ -56,7 +56,7 @@ System.out.println("\n #3 A = B != C, C correct");
 int a3 = 2;
 int b3 = 2;
 int c3 = 1;
-api.updateGroupRating(new Person("A", 3, 1400.0, 0.5), new Person("B", 3, 1600.0, 0.8), new Person("C", 3, 1800.0, 0.9), a3, b3, c3);
+api.updateGroupRating(new Person("A", 3, 1400.0, 0.5), new Person("B", 3, 1400.0, 0.8), new Person("C", 3, 1800.0, 0.9), a3, b3, c3);
 
 // Calculate expected results using Elo Calculator 
 expectedA = 10.4; 
@@ -70,7 +70,7 @@ System.out.println("\n #4 A = B != C, C wrong");
 int a4 = 1;
 int b4 = 1;
 int c4 = 3;
-api.updateGroupRating(new Person("A", 4, 1400.0, 0.5),new Person("B", 4, 1600.0, 0.8), new Person("C", 4, 1800.0, 0.9), a4, b4, c4);
+api.updateGroupRating(new Person("A", 4, 1400.0, 0.5),new Person("B", 4, 1400.0, 0.8), new Person("C", 4, 1800.0, 0.9), a4, b4, c4);
 
 // Calculate expected results using Elo Calculator 
 expectedA = 10.4; 
@@ -83,7 +83,13 @@ System.out.println("\n #5 A != B = C, C correct");
 int a5 = 2;
 int b5 = 1;
 int c5 = 1;
-api.updateGroupRating(new Person("A", 5, 1400.0, 0.5), new Person("B", 5, 1600.0, 0.8), new Person("C", 5, 1800.0, 0.9), a5, b5, c5);
+api.updateGroupRating(new Person("A", 5, 1400.0, 0.5), new Person("B", 5, 1400.0, 0.8), new Person("C", 5, 1800.0, 0.9), a5, b5, c5);
+
+System.out.println("\n #5prime A = C != B, C correct");
+int a10 = 1;
+int b10 = 3;
+int c10 = 1;
+api.updateGroupRating(new Person("A", 5, 1400.0, 0.5), new Person("B", 5, 1400.0, 0.8), new Person("C", 5, 1800.0, 0.9), a10, b10, c10);
 
 // Calculate expected results using Elo Calculator 
 expectedA = -9.6; 
@@ -95,7 +101,7 @@ System.out.println("\n #6 A != B = C, C wrong, A correct");
 int a6 = 1;
 int b6 = 3;
 int c6 = 3;
-api.updateGroupRating(new Person("A", 6, 1400.0, 0.5), new Person("B", 6, 1600.0, 0.8), new Person("C", 6, 1800.0, 0.9), a6, b6, c6);
+api.updateGroupRating(new Person("A", 6, 1400.0, 0.5), new Person("B", 6, 1400.0, 0.8), new Person("C", 6, 1800.0, 0.9), a6, b6, c6);
 
 // Calculate expected results using Elo Calculator 
 expectedA = (30.4 + 36.4) / 2.0; 
@@ -107,7 +113,7 @@ System.out.println("\n #7 A != B = C, All Wrong");
 int a7 = 2;
 int b7 = 3;
 int c7 = 3;
-api.updateGroupRating(new Person("A", 7, 1400.0, 0.5),new Person("B", 7, 1600.0, 0.8), new Person("C", 7, 1800.0, 0.9), a7, b7, c7);
+api.updateGroupRating(new Person("A", 7, 1400.0, 0.5),new Person("B", 7, 1400.0, 0.8), new Person("C", 7, 1800.0, 0.9), a7, b7, c7);
 
 // Calculate expected results using Elo Calculator 
 expectedA = 16.4;
@@ -119,7 +125,7 @@ System.out.println("\n #8 A != B != C, Discard");
 int a8 = 1;
 int b8 = 2;
 int c8 = 3;
-api.updateGroupRating(new Person("A", 8, 1400.0, 0.5), new Person("B", 8, 1600.0, 0.8), new Person("C", 8, 1800.0, 0.9), a8, b8, c8);
+api.updateGroupRating(new Person("A", 8, 1400.0, 0.5), new Person("B", 8, 1400.0, 0.8), new Person("C", 8, 1800.0, 0.9), a8, b8, c8);
 
 // Calculate expected results using Elo Calculator 
 expectedA = 0.0;

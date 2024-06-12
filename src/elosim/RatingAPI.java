@@ -34,10 +34,14 @@ class RatingAPI {
 
         if (Aanswer == Banswer) {   // if A == B
             double inspection = new Random().nextDouble();
+            //double inspection = 1.0;
                 
             // initialise A and B as tie : A vs B
             AChange = this.calculateChange(A, B, TIE);
             BChange = this.calculateChange(B, A, TIE);
+
+            //System.out.println("Achange = " + AChange);
+            //System.out.println("Bchange = " + BChange);
 
             double CvA = 0.0;
             double CvB = 0.0;
@@ -46,7 +50,10 @@ class RatingAPI {
             if (inspection <= C_INSPECTION_RATE) { // C is inspected
                 
                 if (Aanswer == Canswer) { // if A = B = C, A and B are tie, ***NO CHANGE TO C 
-                    // do nothing
+                    // do nothing --> all do nothing
+                    AChange = 0.0;
+                    BChange = 0.0;
+                    CChange = 0.0;
     
                 } else {    // if A = B != C
                     
@@ -82,10 +89,18 @@ class RatingAPI {
     
             } else { // C is not inspected, only A and B are compared to C's answer, C doesn't change
 
-                // same answer will always tie -> both correct or both wrong
 
-                AChange = this.calculateChange(A, B, TIE);
-                BChange = this.calculateChange(B, A, TIE);
+                if (Aanswer == Banswer && Banswer == Canswer) { // if all same: do nothing
+                    AChange = 0.0;
+                    BChange = 0.0;
+                    CChange = 0.0;
+
+                } else { // else: AB tie, C no change
+                    AChange = this.calculateChange(A, B, TIE);
+                    BChange = this.calculateChange(B, A, TIE);
+
+                }
+                
     
             }
     
@@ -95,9 +110,10 @@ class RatingAPI {
 
             // C has a 20% chance of being selected
             double inspectionC = new Random().nextDouble();
+            //double inspectionC = 1.0;
 
             if (inspectionC <= C_INSPECTION_RATE) {    // if C is inspected
-                if (!(Aanswer != Banswer && Banswer != Canswer)) {    // if not all different
+                if (!(Aanswer != Banswer && Banswer != Canswer && Aanswer != Canswer)) {    // if not all different --> THE PREVIOUS ERROR
             
                     if (Canswer == this.correctAnswer) {    // if C is correct, A vs B, C no change, at least A or B is correct since not all diff
     
@@ -154,10 +170,16 @@ class RatingAPI {
             } else {
 
                 // Assume C is correct
-                if (!(Aanswer != Banswer && Banswer != Canswer)) { // A != B, but one of them equals C
+                //System.out.println("YES");
+                if (!(Aanswer != Banswer && Banswer != Canswer && Aanswer != Canswer)) { // A != B, but one of them equals C
+                    /*System.out.println("Not all different");
+                    System.out.println("A = " + Aanswer);
+                    System.out.println("B = " + Banswer);
+                    System.out.println("C = " + Canswer);*/
                     
 
                     if (Aanswer == Canswer && Banswer != Canswer) { // A is correct, B is wrong
+                        //System.out.println("a correct, B wrong, c default");
                         AChange = this.calculateChange(A, B, WIN);
                         BChange = this.calculateChange(B, A, LOSE);
                     } else if (Banswer == Canswer && Aanswer != Canswer) { // B is correct, A is wrong
@@ -178,7 +200,7 @@ class RatingAPI {
         // update ratings for all three
 
         // uncomment to test output for individual output
-        // System.out.println(String.format("---> Calculated Changes for A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
+        //System.out.println(String.format("---> Calculated Changes for A: %.3f, B: %.3f, C: %.3f", AChange, BChange, CChange));
         A.updateRating(AChange);
         B.updateRating(BChange);
         C.updateRating(CChange);
