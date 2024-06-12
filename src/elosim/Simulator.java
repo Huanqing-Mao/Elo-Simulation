@@ -35,19 +35,11 @@ class Simulator {
         
         while (counter < numPoints) {
             double assignedAccuracy = mean + stdDev * random.nextGaussian();
-            /*double assignedAccuracy = 0.0;
-            if (type.equals("A")) {
-                assignedAccuracy = 1.0;
-            } else {
-                assignedAccuracy = 0.0;
-            }*/
             if (assignedAccuracy >= MIN && assignedAccuracy <= MAX) {
                 people.add(new Person(type, counter + 1, initialRating, assignedAccuracy));
                 counter++;
             }
 
-            //people.add(new Person(type, counter + 1, initialRating, assignedAccuracy));
-            //counter++;
         }
         
         return people;
@@ -278,15 +270,7 @@ class Simulator {
                 // initialise the list of A and the list of B
                 ArrayList<Person> AList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "A", A_DEFAULT);
                 ArrayList<Person> BList = generateNormalDistributionPerson(MEAN, STD, NUM_AB, "B", B_DEFAULT);
-                /*double Asum = 0.0;
-                double Bsum = 0.0;
-                for (int ab = 0; ab < NUM_AB; ab++) {
-                    Asum += AList.get(ab).getAccuracy();
-                    Bsum += BList.get(ab).getAccuracy();
-                }
-                System.out.println("avg acc of A = " + Asum / NUM_AB);
-                System.out.println("avg acc of B = " + Bsum / NUM_AB);*/
-
+               
                 
                 // simulate A, B, C answering custom number of questions
                 for (int j = 0; j < NUMQUESTIONS; j++) {
@@ -338,10 +322,6 @@ class Simulator {
             }
 
         }
-
-        //System.out.println(simulator.ARatingDistri);
-        //System.out.println(simulator.BRatingDistri);
-
         
        
         // record and summarise C
@@ -398,13 +378,6 @@ class Simulator {
         // export actual B values
         String resultsB = String.format("data/Actual Results B %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         // writeResults(resultsB, bAccuracies, bValues); --> time consuming
-
-
-        
-        
-        
-        
-        
 
 
     }

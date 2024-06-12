@@ -170,13 +170,9 @@ class RatingAPI {
             } else {
 
                 // Assume C is correct
-                //System.out.println("YES");
+                
                 if (!(Aanswer != Banswer && Banswer != Canswer && Aanswer != Canswer)) { // A != B, but one of them equals C
-                    /*System.out.println("Not all different");
-                    System.out.println("A = " + Aanswer);
-                    System.out.println("B = " + Banswer);
-                    System.out.println("C = " + Canswer);*/
-                    
+                
 
                     if (Aanswer == Canswer && Banswer != Canswer) { // A is correct, B is wrong
                         //System.out.println("a correct, B wrong, c default");
