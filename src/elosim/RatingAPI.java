@@ -34,14 +34,11 @@ class RatingAPI {
 
         if (Aanswer == Banswer) {   // if A == B
             double inspection = new Random().nextDouble();
-            //double inspection = 1.0;
                 
             // initialise A and B as tie : A vs B
             AChange = this.calculateChange(A, B, TIE);
             BChange = this.calculateChange(B, A, TIE);
 
-            //System.out.println("Achange = " + AChange);
-            //System.out.println("Bchange = " + BChange);
 
             double CvA = 0.0;
             double CvB = 0.0;
