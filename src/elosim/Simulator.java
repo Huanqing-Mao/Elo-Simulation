@@ -1,9 +1,6 @@
 package elosim;
 
 import java.util.*;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 class Simulator {
     public static int NUM_LOOP;
@@ -191,7 +188,7 @@ class Simulator {
         summariser.writePercentileFile(csvA, header, aData);
 
         // export actual A values
-        String resultsA = String.format("data/Actual Results A %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
+        // String resultsA = String.format("data/Actual Results A %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         // writeResults(resultsA, aAccuracies, aValues); --> time consuming
 
         System.out.println("=========== Summary B ============");
@@ -208,8 +205,10 @@ class Simulator {
 
 
         // export actual B values
-        String resultsB = String.format("data/Actual Results B %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
+        // String resultsB = String.format("data/Actual Results B %dloop %dqn.csv", NUM_LOOP, NUMQUESTIONS);
         // writeResults(resultsB, bAccuracies, bValues); --> time consuming
+
+        sc.close();
 
 
     }
