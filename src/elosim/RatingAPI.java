@@ -136,7 +136,7 @@ class RatingAPI {
                             double CvB = -BChange;
                             CChange = CvA + CvB; // ***NO TAKING AVERAGE
     
-                        } else {  // C loses, C compare w winner, other loser compare w winner, winner take average
+                        } else {  // C loses, C compare w winner, other loser compare w winner
     
                             if (Aanswer == this.correctAnswer) {    // if A correct, B = C
                                 
