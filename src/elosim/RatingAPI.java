@@ -35,17 +35,12 @@ class RatingAPI {
 
         if (Aanswer == Banswer) {   // if A == B
             // double inspection = new Random().nextDouble();
-                
-            // initialise A and B as tie : A vs B
-            //AChange = this.calculateChange(A, B, TIE);
-            //BChange = this.calculateChange(B, A, TIE);
-
 
             double CvA = 0.0;
             double CvB = 0.0;
 
                 
-            if (Aanswer == Canswer) { // if A = B = C, A and B are tie, ***NO CHANGE TO C 
+            if (Aanswer == Canswer) { // if A = B = C, no changes at all
                 // do nothing --> all do nothing
                 AChange = 0.0;
                 BChange = 0.0;
@@ -97,7 +92,7 @@ class RatingAPI {
                                          
 
                         // check A : lose 1800 twice
-                        AChange = this.calculateChange(A,score1800, LOSE) + this.calculateChange(A,score1800, LOSE);
+                        AChange = this.calculateChange(A, score1800, LOSE) + this.calculateChange(A, score1800, LOSE);
                 
 
                         // check B: lose 1800 twice
@@ -122,8 +117,8 @@ class RatingAPI {
 
             if (inspectionC <= C_INSPECTION_RATE) {    // if C is inspected
                 if (!(Aanswer != Banswer && Banswer != Canswer && Aanswer != Canswer)) {    // if not all different --> THE PREVIOUS ERROR
-                    //System.out.println("Yes");
-                    if (Canswer == this.correctAnswer) {    // if C is correct, A vs B, C no change, at least A or B is correct since not all diff
+                    
+                    if (Canswer == this.correctAnswer) {    // if C is correct
     
                         if (Aanswer == Canswer && Aanswer == correctAnswer && Banswer != correctAnswer) {    // if A is correct, A win, B wrong
                           
