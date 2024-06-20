@@ -40,3 +40,7 @@ class RatingAPI: // calculate and update ratings for the given people
 - if A = B, all 3 are correct -> C keeps constant
 - C can be inspected when A != B 
 - the person compared twice will add/subtract twice, no more taking average
+
+
+**** FURTHER CHANGES
+- not tying A and B, compare w 1800?

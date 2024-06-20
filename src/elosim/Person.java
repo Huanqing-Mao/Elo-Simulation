@@ -26,7 +26,7 @@ class Person {
     }
 
 
-    public void updateRating(double changeInRating) {
+    void updateRating(double changeInRating) {
         this.rating += changeInRating;
     }
 
