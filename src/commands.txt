@@ -1,2 +1,3 @@
 javac elosim/*.java
-java elosim.Simulator
+java elosim.Simulator 
+NUM_LOOP NUM_QUESTIONS
