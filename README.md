@@ -1,10 +1,15 @@
 ### Compile Files: 
-`cd directory/to/the/src`  
-`javac elosim/*.java`
-
+```bash
+cd directory/to/the/src
+```
+```bash
+javac elosim/*.java`
+```
 
 ### Running the Simulator
-`java elosim.Simulator`
+```bash
+java elosim.Simulator
+```
 
 Input two integers
 `NUM_LOOP NUMQUESTIONS`
