@@ -11,7 +11,7 @@ for each C:
             in each question
             get random A, random B
             get A, B, C results
-            update ratings using RatingAPI given A, B, C results
+            update ratings using Rater given A, B, C results
 
 
 Helper Classes:
@@ -27,7 +27,7 @@ class Person: // encapsulate each Person's information
         - int giverAnswer(int solution)
         - void updateRating(double changeInRating)
 
-class RatingAPI: // calculate and update ratings for the given people
+class Rater: // calculate and update ratings for the given people
     properties:
         - final k = 40
         - final constant = 400
