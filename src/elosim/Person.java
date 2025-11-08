@@ -1,4 +1,4 @@
-package elosim; // comment this to use testPerson.jsh or testAPI.jsh
+package elosim; // comment this to use testPerson.jsh or testRater.jsh
 
 import java.util.*;
 

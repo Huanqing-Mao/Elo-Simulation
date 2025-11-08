@@ -55,7 +55,7 @@ class Simulator {
         Simulator simulator = new Simulator();
         Summariser summariser = new Summariser();
         Random random = new Random();
-        RatingAPI api = new RatingAPI(CORRECT_ANSWER);
+        Rater api = new Rater(CORRECT_ANSWER);
        
 
         for (int j = 0; j < NUM_C - 3; j++) {
