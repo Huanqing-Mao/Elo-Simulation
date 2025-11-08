@@ -1,0 +1,36 @@
+# Compiled Java class files
+*.class
+
+# Data files
+*.csv
+*.xlsx
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Build directories
+target/
+build/
+out/
+bin/
+
+# Log files
+*.log
